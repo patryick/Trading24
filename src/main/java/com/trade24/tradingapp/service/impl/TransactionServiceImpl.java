@@ -1,8 +1,10 @@
 package com.trade24.tradingapp.service.impl;
 
 import com.trade24.tradingapp.entity.Transaction;
+import com.trade24.tradingapp.entity.User;
 import com.trade24.tradingapp.enums.TransactionStatus;
 import com.trade24.tradingapp.repository.TransactionRepository;
+import com.trade24.tradingapp.repository.UserRepository;
 import com.trade24.tradingapp.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,21 +13,36 @@ import java.util.List;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
-    private TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public TransactionServiceImpl(TransactionRepository transactionRepository) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, UserRepository userRepository) {
         this.transactionRepository = transactionRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     public List<Transaction> getUserTransactions(Long userId) {
-        return null;
+        return transactionRepository.findByUserId(userId);
     }
 
     @Override
-    public void addTransaction(Transaction transaction) {
-
+    public Transaction addTransaction(Transaction transaction, Long ownerId, Long requesterId) {
+        if (ownerId == null || requesterId == null) {
+            throw new IllegalArgumentException("No owner or requester id");
+        }
+        User owner = this.userRepository.findById(ownerId).orElse(null);
+        User requester = this.userRepository.findById(requesterId).orElse(null);
+        if (owner == null) {
+            throw new IllegalArgumentException("no such user: " + ownerId);
+        }
+        if (requester == null) {
+            throw new IllegalArgumentException("no such user: " + requesterId);
+        }
+        transaction.setOwner(owner);
+        transaction.setRequester(requester);
+        return this.transactionRepository.save(transaction);
     }
 
     @Override
@@ -35,7 +52,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void deleteTransaction(Long id) {
-
+        this.transactionRepository.deleteById(id);
     }
 
     @Override

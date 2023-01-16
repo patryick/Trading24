@@ -16,19 +16,7 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    Address getById(Long id) {
-        return null;
-    }
-
-    void deleteById(Long id) {
-
-    }
-
     void updateAddress(Long id, Address address) {
 
-    }
-
-    Address createAddress(Address address) {
-        return null;
     }
 }
