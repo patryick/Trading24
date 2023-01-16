@@ -27,8 +27,8 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    public Item addItem(@RequestBody Item item) {
-        return itemService.addItem(item);
+    public Item addItem(@RequestBody Item item, @RequestParam Long categoryId, @RequestParam Long ownerId) {
+        return itemService.addItem(item, categoryId, ownerId);
     }
 
     public void updateItem(Long id, Item item) {
