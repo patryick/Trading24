@@ -4,10 +4,15 @@ import com.trade24.tradingapp.entity.Category;
 import com.trade24.tradingapp.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3333", maxAge = 3600)
 @RequestMapping("/category")
 public class CategoryController {
 

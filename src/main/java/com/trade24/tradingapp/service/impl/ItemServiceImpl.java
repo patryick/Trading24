@@ -10,6 +10,7 @@ import com.trade24.tradingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,8 +28,15 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<Item> getAllItems() {
-        return null;
+    public List<Item> getAllItems(Long id) {
+        List list = new ArrayList<Item>();
+        this.itemRepository.findAll().forEach(item -> {
+            if (item.getOwner().getId() == id) {
+                list.add(item);
+            }
+        });
+
+        return list;
     }
 
     @Override

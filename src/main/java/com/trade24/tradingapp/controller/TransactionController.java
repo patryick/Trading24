@@ -5,11 +5,15 @@ import com.trade24.tradingapp.enums.TransactionStatus;
 import com.trade24.tradingapp.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/transaction")
+@CrossOrigin(origins = "http://localhost:3333", maxAge = 3600)
 public class TransactionController {
 
     private final TransactionService transactionService;
