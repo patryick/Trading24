@@ -9,6 +9,7 @@ import com.trade24.tradingapp.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -58,5 +59,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void changeTransactionStatus(Long id, TransactionStatus status) {
 
+    }
+
+    @Override
+    public List getTransactions() {
+        List list = new ArrayList<Transaction>();
+        this.transactionRepository.findAll().forEach(transaction -> list.add(transaction));
+        return list;
     }
 }
