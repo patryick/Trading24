@@ -4,8 +4,7 @@ import com.trade24.tradingapp.entity.Transaction;
 import com.trade24.tradingapp.enums.TransactionStatus;
 import com.trade24.tradingapp.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,18 +19,22 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    public List<Transaction> getUserTransactions(Long userId) {
-        return null;
+    @GetMapping("/getByUser/{userId}")
+    public List<Transaction> getUserTransactions(@PathVariable Long userId) {
+        return this.transactionService.getUserTransactions(userId);
     }
 
-    public void addTransaction(Transaction transaction) {
-
+    @PostMapping("/add")
+    public Transaction addTransaction(@RequestBody Transaction transaction, @RequestParam Long ownerId, @RequestParam Long requesterId) {
+        return this.transactionService.addTransaction(transaction, ownerId, requesterId);
     }
+
     public void updateTransaction(Long id, Transaction transaction) {
 
     }
-    public void deleteTransaction(Long id) {
 
+    public void deleteTransaction(Long id) {
+        this.transactionService.deleteTransaction(id);
     }
     public void changeTransactionStatus(Long id, TransactionStatus status) {
 

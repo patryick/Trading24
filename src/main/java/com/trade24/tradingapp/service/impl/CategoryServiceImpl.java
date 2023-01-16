@@ -27,12 +27,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category getById(Long id) {
-        return null;
+        return this.categoryRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void addCategory(Category category) {
-
+    public Category addCategory(Category category) {
+        return this.categoryRepository.save(category);
     }
 
     @Override
