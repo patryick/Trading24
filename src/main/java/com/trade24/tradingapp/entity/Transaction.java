@@ -16,8 +16,8 @@ public class Transaction {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "requester", nullable = false)
+    @ManyToOne()
+    @JoinColumn(name = "requester")
     private User requester;
 
     @ManyToOne(optional = false)
