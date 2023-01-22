@@ -21,6 +21,10 @@ public class Item {
 
     private String imageUrl;
 
+    private Long amount;
+
+    private Long price;
+
     @ManyToOne(optional = false) //TODO true
     @JoinColumn(name = "category_id", nullable = false) //TODO nullable = false
     private Category category;

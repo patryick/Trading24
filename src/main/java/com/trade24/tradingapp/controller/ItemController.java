@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+@CrossOrigin(origins = "http://localhost:3333", maxAge = 3600)
 public class ItemController {
     private ItemService itemService;
 
@@ -17,8 +18,11 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    public List<Item> getAllItems() {
-        return null;
+
+    @GetMapping("/getAll/{id}")
+    public List<Item> getAllItems(@PathVariable Long id) {
+        System.out.println(id);
+        return this.itemService.getAllItems(id);
     }
 
     @GetMapping("/get/{id}")
@@ -27,8 +31,9 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    public Item addItem(@RequestBody Item item, @RequestParam Long categoryId, @RequestParam Long ownerId) {
-        return itemService.addItem(item, categoryId, ownerId);
+    public Item addItem(@RequestBody Item item) {
+        System.out.println(item);
+        return itemService.addItem(item);
     }
 
     public void updateItem(Long id, Item item) {
