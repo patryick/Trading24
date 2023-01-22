@@ -8,7 +8,7 @@ import java.util.List;
 public interface TransactionService {
     List<Transaction> getUserTransactions(Long userId);
     List<Transaction> getTransactions();
-    void addTransaction(Transaction transaction);
+    Transaction addTransaction(Transaction transaction);
     void updateTransaction(Long id, Transaction transaction);
     void deleteTransaction(Long id);
     void changeTransactionStatus(Long id, TransactionStatus status);

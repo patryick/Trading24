@@ -45,19 +45,16 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item addItem(Item item, Long categoryId, Long ownerId) {
-        if (categoryId == null || ownerId == null) {
+    public Item addItem(Item item) {
+        if (item.getCategory() == null || item.getOwner() == null) {
             throw new IllegalArgumentException("Item must have category and ownerId");
         }
-        Category category = categoryService.getById(categoryId);
-        if (category == null) {
-            throw new IllegalArgumentException("No such category");
-        }
-        item.setCategory(category);
-        User owner = userService.getUserById(ownerId);
+
+        User owner = userService.getUserById(item.getOwner().getId());
         if (owner == null) {
-            throw new IllegalArgumentException("No such user" + ownerId);
+            throw new IllegalArgumentException("No such user" + owner);
         }
+        
         item.setOwner(owner);
         return itemRepository.save(item);
     }
