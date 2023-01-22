@@ -30,8 +30,8 @@ public class TransactionController {
     }
 
     @PostMapping("/add")
-    public Transaction addTransaction(@RequestBody Transaction transaction, @RequestParam Long ownerId, @RequestParam Long requesterId) {
-        return this.transactionService.addTransaction(transaction, ownerId, requesterId);
+    public Transaction addTransaction(@RequestBody Transaction transaction) {
+        return this.transactionService.addTransaction(transaction);
     }
 
     @GetMapping("/getAll")

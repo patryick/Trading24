@@ -29,20 +29,20 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction addTransaction(Transaction transaction, Long ownerId, Long requesterId) {
-        if (ownerId == null || requesterId == null) {
-            throw new IllegalArgumentException("No owner or requester id");
-        }
-        User owner = this.userRepository.findById(ownerId).orElse(null);
-        User requester = this.userRepository.findById(requesterId).orElse(null);
-        if (owner == null) {
-            throw new IllegalArgumentException("no such user: " + ownerId);
-        }
-        if (requester == null) {
-            throw new IllegalArgumentException("no such user: " + requesterId);
-        }
-        transaction.setOwner(owner);
-        transaction.setRequester(requester);
+    public Transaction addTransaction(Transaction transaction) {
+//        if (transaction.getOwner() == null || transaction.getRequester() == null) {
+//            throw new IllegalArgumentException("No owner or requester id");
+//        }
+//        User owner = this.userRepository.findById(transaction.getOwner().getId()).orElse(null);
+//        User requester = this.userRepository.findById(transaction.getRequester().getId()).orElse(null);
+//        if (owner == null) {
+//            throw new IllegalArgumentException("no such user: " + owner);
+//        }
+//        // if (requester == null) {
+        //     throw new IllegalArgumentException("no such user: " + requesterId);
+        // }
+//        transaction.setOwner(owner);
+//        transaction.setRequester(requester);
         return this.transactionRepository.save(transaction);
     }
 
